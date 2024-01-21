@@ -7,20 +7,17 @@ import java.util.List;
 
 public class ExpressionParser extends BaseParser{
     private static MathExpression buildExpression(String exprName, MathExpression left, MathExpression right) {
-        return switch (exprName) {
-            case OperationStrings.Add -> new Add(left, right);
-            case OperationStrings.Multiply -> new Multiply(left, right);
-            case OperationStrings.Degree -> new Degree(left, right);
-            default -> throw new AssertionError("Unreachable statement");
-        };
+        if (exprName.equals(OperationStrings.Add)) {
+            return new Add(left, right);
+        }
+        if (exprName.equals(OperationStrings.Multiply)) {
+            return new Multiply(left, right);
+        }
+        return new Degree(left, right);
     }
 
     private static boolean leftAssociative(String exprName) {
-        return switch (exprName) {
-            case OperationStrings.Add, OperationStrings.Multiply -> true;
-            case OperationStrings.Degree -> false;
-            default -> throw new AssertionError("Unreachable statement");
-        };
+        return !exprName.equals(OperationStrings.Degree);
     }
 
     @Override
