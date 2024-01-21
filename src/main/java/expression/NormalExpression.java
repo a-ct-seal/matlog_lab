@@ -127,7 +127,7 @@ public class NormalExpression {
     public NormalExpression power(NormalExpression right) {
         NormalExpression omega = new NormalExpression();
         NormalExpression total = new NormalExpression(1);
-        if (compare(total) == 0) {
+        if (compare(total) == 0 || compare(new NormalExpression(0)) == 0) {
             return this;
         }
         if (compare(omega) == -1) {
